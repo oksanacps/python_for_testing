@@ -1,1 +1,1 @@
-# python_for_testing
+# Repositori for python traning
