@@ -15,24 +15,17 @@ class add_new_contact(unittest.TestCase):
         self.wd.implicitly_wait(60)
     
     def test_add_new_contact(self):
-        #success = True
         wd = self.wd
-        # open home page
-        wd.get("http://localhost/addressbook/delete.php?part=1;")
-        # login
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").send_keys("\\undefined")
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
-        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
-        # click on button add new
-        wd.find_element_by_link_text("add new").click()
-        # create contact
+        self.open_home_page(wd)
+        self.login(wd)
+        self.click_on_button_add_new(wd)
+        self.create_contact(wd)
+        self.logout(wd)
+
+    def logout(self, wd):
+        wd.find_element_by_link_text("Logout").click()
+
+    def create_contact(self, wd):
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys("Gavrilov")
@@ -59,11 +52,25 @@ class add_new_contact(unittest.TestCase):
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys("1986")
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
-        # logout
-        wd.find_element_by_link_text("Logout").click()
 
-       # self.assertTrue(success)
-    
+    def click_on_button_add_new(self, wd):
+        wd.find_element_by_link_text("add new").click()
+
+    def login(self, wd):
+        wd.find_element_by_name("pass").click()
+        wd.find_element_by_name("pass").send_keys("\\undefined")
+        wd.find_element_by_name("user").click()
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_name("user").click()
+        wd.find_element_by_name("pass").click()
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+
+    def open_home_page(self, wd):
+        wd.get("http://localhost/addressbook/delete.php?part=1;")
+
     def tearDown(self):
         self.wd.quit()
 
