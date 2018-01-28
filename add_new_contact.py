@@ -15,9 +15,11 @@ class add_new_contact(unittest.TestCase):
         self.wd.implicitly_wait(60)
     
     def test_add_new_contact(self):
-        success = True
+        #success = True
         wd = self.wd
+        # open home page
         wd.get("http://localhost/addressbook/delete.php?part=1;")
+        # login
         wd.find_element_by_name("pass").click()
         wd.find_element_by_name("pass").send_keys("\\undefined")
         wd.find_element_by_name("user").click()
@@ -28,7 +30,9 @@ class add_new_contact(unittest.TestCase):
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys("secret")
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+        # click on button add new
         wd.find_element_by_link_text("add new").click()
+        # create contact
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys("Gavrilov")
@@ -55,12 +59,10 @@ class add_new_contact(unittest.TestCase):
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys("1986")
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        # logout
         wd.find_element_by_link_text("Logout").click()
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").send_keys("\\undefined")
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").send_keys("\\undefined")
-        self.assertTrue(success)
+
+       # self.assertTrue(success)
     
     def tearDown(self):
         self.wd.quit()
