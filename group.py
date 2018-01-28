@@ -1,6 +1,7 @@
 
 class Group:
-    def __int__(self, groupname, groupheader, groupfooter):
-        self.grouoname = groupname
-        self.groupheader = groupheader
-        self.groupfooter = groupfooter
+
+    def __int__(self, name, header, footer):
+        self.name = name
+        self.header = header
+        self.footer = footer
