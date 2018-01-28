@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
-import unittest
 from group import Group
+import unittest
 
 def is_alert_present(wd):
     try:
@@ -61,7 +61,7 @@ class test_add_grup(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username = "admin", password = "secret")
         self.open_group_page(wd)
-        self.create_group(wd, Group(name="grup", header="GRUOGRUP", footer="111"))
+        self.create_group(wd, Group(name = "grup", header = "GRUOGRUP", footer = "111"))
         self.return_to_group_page(wd)
         self.logout(wd)
 
@@ -70,7 +70,7 @@ class test_add_grup(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username = "admin", password = "secret")
         self.open_group_page(wd)
-        self.create_group(wd, Group(name="", header="", footer=""))
+        self.create_group(wd, Group(name = "", header = "", footer = ""))
         self.return_to_group_page(wd)
         self.logout(wd)
 
