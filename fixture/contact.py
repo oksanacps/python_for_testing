@@ -43,3 +43,8 @@ class ContactHelper:
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
+
+    def delete_contact_on_pencil(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[5]/td[8]/a/img").click()
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/input[2]").click()
