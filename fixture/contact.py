@@ -10,6 +10,7 @@ class ContactHelper:
 
     def create(self, contact):
         wd = self.app.wd
+        self.open_home_page()
         self.click_on_button_add_new()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -40,22 +41,28 @@ class ContactHelper:
 
     def delete_contact_on_button(self):
         wd = self.app.wd
+        self.open_home_page()
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
 
     def delete_contact_on_pencil(self):
         wd = self.app.wd
+        self.open_home_page()
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[5]/td[8]/a/img").click()
         wd.find_element_by_xpath("//div[@id='content']/form[2]/input[2]").click()
 
     def edit_contact_from_below(self, contact):
         wd = self.app.wd
+        self.open_home_page()
+        self.pencil()
         self.edit_contact(contact)
         self.return_to_home_page()
 
     def edit_contact_from_above(self, contact):
         wd = self.app.wd
+        self.open_home_page()
+        self.pencil()
         self.edit_contact(contact)
         self.return_to_home_page()
 
@@ -65,7 +72,6 @@ class ContactHelper:
 
     def edit_contact (self, contact):
         wd = self.app.wd
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[5]/td[8]/a/img").click()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contact.firstname)
@@ -92,3 +98,12 @@ class ContactHelper:
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys(contact.byear)
         wd.find_element_by_name("update").click()
+
+    def pencil (self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[5]/td[8]/a/img").click()
+
+    def open_home_page(self):
+        wd = self.app.wd
+        # open groups page
+        wd.find_element_by_link_text("home").click()
