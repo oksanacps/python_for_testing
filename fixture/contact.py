@@ -49,8 +49,8 @@ class ContactHelper:
     def delete_contact_on_pencil(self):
         wd = self.app.wd
         self.open_home_page()
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[5]/td[8]/a/img").click()
-        wd.find_element_by_xpath("//div[@id='content']/form[2]/input[2]").click()
+        wd.find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
+        wd.find_element_by_xpath("//div/div[4]/form[2]/input[2]").click()
 
     def edit_contact_from_below(self, contact):
         wd = self.app.wd
@@ -101,9 +101,14 @@ class ContactHelper:
 
     def pencil (self):
         wd = self.app.wd
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[5]/td[8]/a/img").click()
+        wd.find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
 
     def open_home_page(self):
         wd = self.app.wd
         # open groups page
         wd.find_element_by_link_text("home").click()
+
+    def count(self):
+        wd = self.app.wd
+        self.open_home_page()
+        return len(wd.find_elements_by_name("selected[]"))
