@@ -120,8 +120,8 @@ class ContactHelper:
         str_table = list(wd.find_elements_by_name("entry"))
         for element in str_table:
             cells = list(element.find_elements_by_tag_name("td"))
-            text_ln = cells[1]
-            text_fn = cells[2]
+            text_ln = cells[1].text
+            text_fn = cells[2].text
             id = element.find_element_by_name("selected[]").get_attribute("value")
             contact_list.append(Contact(firstname = text_fn, lastname = text_ln, id = id))
         return contact_list
