@@ -38,6 +38,7 @@ class ContactHelper:
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys(contact.byear)
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.contact_cache = None
 
     def delete_contact_on_button(self):
         wd = self.app.wd
@@ -45,12 +46,14 @@ class ContactHelper:
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
+        self.contact_cache = None
 
     def delete_contact_on_pencil(self):
         wd = self.app.wd
         self.open_home_page()
         wd.find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
         wd.find_element_by_xpath("//div/div[4]/form[2]/input[2]").click()
+        self.contact_cache = None
 
     def edit_contact_from_below(self, contact):
         wd = self.app.wd
@@ -58,6 +61,7 @@ class ContactHelper:
         self.pencil()
         self.edit_contact(contact)
         self.return_to_home_page()
+        self.contact_cache = None
 
     def edit_contact_from_above(self, contact):
         wd = self.app.wd
@@ -65,6 +69,7 @@ class ContactHelper:
         self.pencil()
         self.edit_contact(contact)
         self.return_to_home_page()
+        self.contact_cache = None
 
     def return_to_home_page(self):
         wd = self.app.wd
@@ -98,6 +103,7 @@ class ContactHelper:
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys(contact.byear)
         wd.find_element_by_name("update").click()
+        self.contact_cache = None
 
     def pencil (self):
         wd = self.app.wd
@@ -113,15 +119,18 @@ class ContactHelper:
         self.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.open_home_page()
-        contact_list = []
-        str_table = list(wd.find_elements_by_name("entry"))
-        for element in str_table:
-            cells = list(element.find_elements_by_tag_name("td"))
-            text_ln = cells[1].text
-            text_fn = cells[2].text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            contact_list.append(Contact(firstname = text_fn, lastname = text_ln, id = id))
-        return contact_list
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.open_home_page()
+            self.contact_cache = []
+            str_table = list(wd.find_elements_by_name("entry"))
+            for element in str_table:
+                cells = list(element.find_elements_by_tag_name("td"))
+                text_ln = cells[1].text
+                text_fn = cells[2].text
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.contact_cache.append(Contact(firstname = text_fn, lastname = text_ln, id = id))
+        return list(self.contact_cache)
