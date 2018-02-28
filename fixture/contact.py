@@ -58,6 +58,8 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home_page()
         #wd.find_elements_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img")[index].click()
+        str_table = list(wd.find_elements_by_name("entry"))
+        str_table[index].find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
         wd.find_element_by_xpath("//div/div[4]/form[2]/input[2]").click()
         self.contact_cache = None
 
@@ -118,11 +120,14 @@ class ContactHelper:
         self.contact_cache = None
 
     def pencil (self):
-        wd = self.app.wd
-        wd.find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
+        # wd = self.app.wd
+        # wd.find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
+        self.pencil_by_index(0)
 
-    # def pencil_by_index (self):
-    #     wd = self.app.wd
+    def pencil_by_index(self, index):
+        wd = self.app.wd
+        str_table = list(wd.find_elements_by_name("entry"))
+        str_table[index].find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
 
     def open_home_page(self):
         wd = self.app.wd
