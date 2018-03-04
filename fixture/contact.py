@@ -57,14 +57,13 @@ class ContactHelper:
     def delete_contact_on_pencil_by_index(self, index):
         wd = self.app.wd
         self.open_home_page()
-        #wd.find_elements_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img")[index].click()
         str_table = list(wd.find_elements_by_name("entry"))
-        str_table[index].find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
+        str_table[index].find_element_by_xpath("./td[8]/a/img").click()
         wd.find_element_by_xpath("//div/div[4]/form[2]/input[2]").click()
         self.contact_cache = None
 
     def edit_contact_from_below(self, contact):
-        self.edit_contact_from_below_by_index(0)
+        self.edit_contact_from_below_by_index(contact, 0)
 
     def edit_contact_from_below_by_index(self, contact, index):
         wd = self.app.wd
@@ -75,7 +74,7 @@ class ContactHelper:
         self.contact_cache = None
 
     def edit_contact_from_above(self, contact):
-        self.edit_contact_from_above_by_index(0)
+        self.edit_contact_from_above_by_index(contact, 0)
 
     def edit_contact_from_above_by_index(self, contact, index):
         wd = self.app.wd
@@ -127,7 +126,8 @@ class ContactHelper:
     def pencil_by_index(self, index):
         wd = self.app.wd
         str_table = list(wd.find_elements_by_name("entry"))
-        str_table[index].find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
+        # str_table[index].find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
+        str_table[index].find_element_by_xpath("./td[8]/a/img").click()
 
     def open_home_page(self):
         wd = self.app.wd
