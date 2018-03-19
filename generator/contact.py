@@ -14,8 +14,8 @@ except getopt.GetoptError as err:
     sys.exit(2)
 
 
-n = 5
-f = "data/contact.json"
+n = 3
+f = "data/contacts.json"
 
 for o, a in opts:
     if o == "-n":
@@ -25,11 +25,11 @@ for o, a in opts:
 
 
 def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + " "*10
+    symbols = string.ascii_letters + string.digits
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
-testinfo = [Contact(firstname="", middlename="", lastname="", company="", address="", mobile="", byear="")] + [
-    Contact(firstname=random_string("firstname", 10), middlename=random_string("middlename", 10), lastname=random_string("lastname", 10),
+testdata = [Contact(firstname="", middlename="", lastname="", company="", address="", mobile="", byear="")] + [
+    Contact(firstname=random_string("firstname", 20), middlename=random_string("middlename", 20), lastname=random_string("lastname", 20),
                     company=random_string("company", 3), address=random_string("address", 5), mobile=random_string("mobile", 5), byear="1986")
             for i in range(n)
 ]
@@ -39,4 +39,4 @@ file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", f)
 
 with open(file, "w") as out:
     jsonpickle.set_encoder_options("json", indent=2)
-    out.write(jsonpickle.encode(testinfo))
+    out.write(jsonpickle.encode(testdata))
