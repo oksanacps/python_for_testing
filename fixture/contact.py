@@ -52,6 +52,18 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
+    def delete_contact_on_button_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        str_table = list(wd.find_elements_by_name("entry"))
+        for element in str_table:
+            id_temp = element.find_element_by_name("selected[]").get_attribute("value")
+            if id_temp == id:
+                element.find_elements_by_tag_name("td")[0].click()
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+        wd.switch_to_alert().accept()
+        self.contact_cache = None
+
     def delete_contact_on_pencil(self):
         self.delete_contact_on_pencil_by_index(0)
 
@@ -60,6 +72,17 @@ class ContactHelper:
         self.open_home_page()
         str_table = list(wd.find_elements_by_name("entry"))
         str_table[index].find_element_by_xpath("./td[8]/a/img").click()
+        wd.find_element_by_xpath("//div/div[4]/form[2]/input[2]").click()
+        self.contact_cache = None
+
+    def delete_contact_on_pencil_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        str_table = list(wd.find_elements_by_name("entry"))
+        for element in str_table:
+            id_temp = element.find_element_by_name("selected[]").get_attribute("value")
+            if id_temp == id:
+                element.find_element_by_xpath("./td[8]/a/img").click()
         wd.find_element_by_xpath("//div/div[4]/form[2]/input[2]").click()
         self.contact_cache = None
 
@@ -81,6 +104,14 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home_page()
         self.pencil_by_index(index)
+        self.edit_contact(contact)
+        self.return_to_home_page()
+        self.contact_cache = None
+
+    def edit_contact_from_above_by_id(self, contact, id):
+        wd = self.app.wd
+        self.open_home_page()
+        self.pencil_by_id(id)
         self.edit_contact(contact)
         self.return_to_home_page()
         self.contact_cache = None
@@ -127,8 +158,15 @@ class ContactHelper:
     def pencil_by_index(self, index):
         wd = self.app.wd
         str_table = list(wd.find_elements_by_name("entry"))
-        # str_table[index].find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
         str_table[index].find_element_by_xpath("./td[8]/a/img").click()
+
+    def pencil_by_id(self, id):
+        wd = self.app.wd
+        str_table = list(wd.find_elements_by_name("entry"))
+        for element in str_table:
+            id_temp = element.find_element_by_name("selected[]").get_attribute("value")
+            if id_temp == id:
+                element.find_element_by_xpath("./td[8]/a/img").click()
 
     def open_home_page(self):
         wd = self.app.wd
