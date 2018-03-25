@@ -5,7 +5,7 @@ import time
 
 def test_delete_contact_on_button(app, db, check_ui):
     if len(db.get_contact_list()) == 0:
-        app.contact.create(Contact(firstname="test"))
+        app.contact.create(Contact(firstname="test", middlename="", lastname="", company="", address="", mobile="", byear=""))
     old_contacts = db.get_contact_list()
     contact = random.choice(old_contacts)
     app.contact.delete_contact_on_button_by_id(contact.id)
@@ -18,7 +18,7 @@ def test_delete_contact_on_button(app, db, check_ui):
 
 def test_delete_contact_on_pencil(app, db, check_ui):
     if len(db.get_contact_list()) == 0:
-        app.contact.create(Contact(firstname="test"))
+        app.contact.create(Contact(firstname="test", middlename="", lastname="", company="", address="", mobile="", byear=""))
     old_contacts = db.get_contact_list()
     contact = random.choice(old_contacts)
     app.contact.delete_contact_on_pencil_by_id(contact.id)

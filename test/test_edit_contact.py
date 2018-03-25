@@ -3,15 +3,17 @@ import random
 
 
 #проверка на кнопку update сверху
-def test_edit_contact_from_above(app, db):
+def test_edit_contact_from_above(app, db, check_ui):
     if len(db.get_contact_list()) == 0:
         app.contact.create(Contact(firstname="test", middlename="", lastname="", company="", address="", mobile="", byear=""))
     old_contacts = db.get_contact_list()
     contact = random.choice(old_contacts)
-    contact.firstname = 'test'
+    contact.firstname = 'edit_contact'
     app.contact.edit_contact_from_above_by_id(contact, id)
     new_contacts = db.get_contact_list()
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contacts, key=Contact.id_or_max) == sorted(app.group.get_group_list(), key=Contact.id_or_max)
 
 
 #проверка на кнопку update снизу
