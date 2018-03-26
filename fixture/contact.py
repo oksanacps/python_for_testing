@@ -96,6 +96,8 @@ class ContactHelper:
                 # element.find_element_by_xpath("./td[8]/a/img").click()
                 cell = element.find_elements_by_tag_name("td")[7]
                 cell.find_element_by_tag_name("a").click()
+                return
+
 
     def edit_contact_from_below(self, contact):
         self.edit_contact_from_below_by_index(contact, 0)
@@ -133,31 +135,38 @@ class ContactHelper:
 
     def edit_contact (self, contact):
         wd = self.app.wd
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(contact.firstname)
-        wd.find_element_by_name("middlename").click()
-        wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys(contact.middlename)
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(contact.lastname)
-        wd.find_element_by_name("company").click()
-        wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys(contact.company)
-        wd.find_element_by_name("address").click()
-        wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(contact.address)
-        wd.find_element_by_name("mobile").click()
-        wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys(contact.mobile)
+        if contact.firstname is not None:
+            wd.find_element_by_name("firstname").click()
+            wd.find_element_by_name("firstname").clear()
+            wd.find_element_by_name("firstname").send_keys(contact.firstname)
+        if contact.middlename is not None:
+            wd.find_element_by_name("middlename").click()
+            wd.find_element_by_name("middlename").clear()
+            wd.find_element_by_name("middlename").send_keys(contact.middlename)
+        if contact.lastname is not None:
+            wd.find_element_by_name("lastname").click()
+            wd.find_element_by_name("lastname").clear()
+            wd.find_element_by_name("lastname").send_keys(contact.lastname)
+        if contact.company is not None:
+            wd.find_element_by_name("company").click()
+            wd.find_element_by_name("company").clear()
+            wd.find_element_by_name("company").send_keys(contact.company)
+        if contact.address is not None:
+            wd.find_element_by_name("address").click()
+            wd.find_element_by_name("address").clear()
+            wd.find_element_by_name("address").send_keys(contact.address)
+        if contact.mobile is not None:
+            wd.find_element_by_name("mobile").click()
+            wd.find_element_by_name("mobile").clear()
+            wd.find_element_by_name("mobile").send_keys(contact.mobile)
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[5]").is_selected():
             wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[5]").click()
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[4]").is_selected():
             wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[4]").click()
-        wd.find_element_by_name("byear").click()
-        wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys(contact.byear)
+        if contact.byear is not None:
+            wd.find_element_by_name("byear").click()
+            wd.find_element_by_name("byear").clear()
+            wd.find_element_by_name("byear").send_keys(contact.byear)
         wd.find_element_by_name("update").click()
         self.contact_cache = None
 
