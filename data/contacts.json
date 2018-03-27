@@ -1,26 +1,6 @@
 [
   {
     "py/object": "model.contact.Contact",
-    "address": "",
-    "all_email_from_home_page": null,
-    "all_phones_from_home_page": null,
-    "byear": "",
-    "company": "",
-    "email_0": null,
-    "email_1": null,
-    "email_2": null,
-    "firstname": "",
-    "homephone": null,
-    "id": null,
-    "lastname": "",
-    "middlename": "",
-    "mobile": "",
-    "mobilephone": null,
-    "secondaryphone": null,
-    "workphone": null
-  },
-  {
-    "py/object": "model.contact.Contact",
     "address": "addressI",
     "all_email_from_home_page": null,
     "all_phones_from_home_page": null,
